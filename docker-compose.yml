@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: mycloud_postgres_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: mycloud
+      TZ: "UTC"
+    ports:
+      - "127.0.0.1:4000:5432"

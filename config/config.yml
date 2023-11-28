@@ -1,12 +1,7 @@
 # dbの接続情報に関する設定
-db :
+db:
   # dbドライバ
-  driver : postgres
+  driver: postgres
 
-development:
-  dialect: postgres
-  datasource: root:secret@/mycloud?parseTime=true
-  dir: ../migrations
-  table: migrations
 
 

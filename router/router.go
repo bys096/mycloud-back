@@ -13,13 +13,16 @@ type Router interface {
 
 type router struct {
 	uc controller.UserController
+	ac controller.AuthController
 }
 
 func NewRouter() Router {
 	if uc, err := controller.NewUserController(); err != nil {
 		log.Fatal("User Controller Assigning is failed")
+	} else if ac, err := controller.NewAuthController(); err != nil {
+		log.Fatal("Auth Controller Assigning is failed")
 	} else {
-		return &router{uc}
+		return &router{uc, ac}
 	}
 
 	return nil
@@ -36,10 +39,11 @@ func (r *router) Index() *gin.Engine {
 		user.POST("", r.uc.CreateUser)
 	}
 
-	//auth := e.Group("/auth")
-	//{
-	//	user.POST("", r.Login)
-	//}
+	auth := e.Group("/auth")
+	{
+		auth.GET("/callback/google", r.ac.GoogleLogin)
+		//auth.POST("", r.Login)
+	}
 
 	return e
 }

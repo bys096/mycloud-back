@@ -25,12 +25,3 @@ func NewGoogleAuthConf() *oauth2.Config {
 
 	return nil
 }
-
-func Auth() error {
-	conf := NewGoogleAuthConf()
-	state := `CSRF攻撃を防ぐためにstateパラメータをつける.コールバック後のトークン取得時に検証する.`
-	// stateをsessionなどに保存.
-	// リダイレクトURL作成.
-	redirectURL := conf.AuthCodeURL(state, oauth2.AccessTypeOffline, oauth2.ApprovalForce),
-	// redirectURLをクライアントに返す.
-}

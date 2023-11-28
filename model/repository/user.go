@@ -24,7 +24,6 @@ func (u *User) Save(user *User) (*User, error) {
 	stmt, err := Db.Prepare("INSERT INTO users(name, email, password, created_at, updated_at) VALUES($1, $2, $3, $4, $5)")
 	checkError(err)
 	defer stmt.Close()
-
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	_, err = stmt.Exec(user.Name, user.Email, hashedPassword, user.CreatedAt, user.UpdatedAt)
 	if err != nil {
